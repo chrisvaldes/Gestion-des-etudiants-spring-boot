@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Saisie des étudiants</title>
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" 
+ th:href="@{/css/bootstrap.min.css}"/>
+ <link rel="stylesheet" type="text/css" href="../static/css/style.css" 
+ th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+	
+	<div class="col-md-6 col-sm-6  col-xs-12 spacer col-md-offset-3">
+		<div class="panel panel-default">
+
+		<div class="panel-body">
+			<form th:action=" @{/etudiant/saveEtudiant}" th:method="POST" th:object="${etudiant}">
+				<div class="panel-heading text-center">
+					<h2>CREATION D'UN ETUDIANT</h2>
+				</div>
+				<div th:if="${successMessage}" class="alert alert-success" id="successMessage">
+					<p th:text="${successMessage}"></p>
+				</div>
+					<div class="form-group">
+						<label class="control-label">Nom:</label> 
+						<input type="text" th:field="*{nom}" class="form-control"/>
+						<span class="text-danger" th:errors="*{nom}"></span>
+					</div>
+				<div class="form-group">
+					<label class="control-label">Prenom:</label>
+					<input type="text" th:field="*{prenom}" class="form-control"/>
+					<span class="text-danger" th:errors="*{prenom}"></span>
+				</div>
+					<div class="form-group">
+						<label class="control-label">Date de naissance:</label> 
+						<input type="date" th:field="*{dateNaissance}" class="form-control"/>
+						<span class="text-danger" th:errors="*{dateNaissance}"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Email:</label> 
+						<input type="text" th:field="*{email}" class="form-control"/>
+						<span class="text-danger" th:errors="*{email}"></span>
+					</div>
+					<div>
+						<button  class="btn btn-success">Créer</button>
+						<a th:href="@{/etudiant/}"  class="btn btn-info">Retour</a>
+					</div>
+					
+				</form>
+		</div>
+	</div>
+	</div>
+	<script>
+		// Masquer le message de succès après 3 secondes (3000 ms)
+        setTimeout(function() {
+            var successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000);
+	</script>
+</body>
+</html>
